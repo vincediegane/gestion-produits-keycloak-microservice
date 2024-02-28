@@ -1,0 +1,35 @@
+<div class="p-3">
+    <div class="card" *ngIf="currentOrder">
+        <div class="card-header">Order Details: {{ orderId }}</div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">Date: {{ currentOrder.date | date: 'dd/MM/yyyy' }}</li>
+                <li class="list-group-item">State: {{ currentOrder.state }}</li>
+            </ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="bg bg-dark text-white">Id</th>
+                        <th class="bg bg-dark text-white">Name</th>
+                        <th class="bg bg-dark text-white">Price</th>
+                        <th class="bg bg-dark text-white">Quantity</th>
+                        <th class="bg bg-dark text-white">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of currentOrder.productItems">
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price | number: '0.2-2' }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.quantity * product.price | number: '0.2-2' }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">Total</td>
+                        <td>{{ getTotal(currentOrder) | number: '0.2-2' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
